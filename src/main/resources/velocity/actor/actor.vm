@@ -1,0 +1,18 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+<ul>
+    <h2>$person.getFullName()</h2>
+    <h4>Role: $person.getRole() | Birthday: $birthdate </h4><br>
+    <div id="image">
+	    #if ($person.getImages().size() > 0)
+	    <img border= "0" src= "$person.getImages().get(0).getPath()" alt = "$person.getFullName()" width="300" height "1000"/>
+	    ##<img border= "0" src= "$show.getImages().get(0).getPath()" alt = "$show.getTitle()" width="300" height "1000"/>
+	    #end
+	</div>
+    <h3>About:</h3>
+    <p>$person.getBio()</p>
+    <h3>Movie Portrayed:</h3>
+    <h5>$shows</h5>
+
+</ul>
+#end

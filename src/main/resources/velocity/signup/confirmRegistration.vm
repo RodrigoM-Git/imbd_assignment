@@ -1,0 +1,8 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+#if($currentUser)
+<p> You are already logged in </p>
+#else
+$Code
+#end
+#end

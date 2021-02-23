@@ -1,0 +1,28 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+
+#if($currentUser)
+	<h2>ACCOUNT PAGE:</h2>
+	<ul>
+	<li>Name: $user.getFirstName() $user.getLastName()</li><br>
+	<li>Email: $user.getEmail()</li><br>
+	<li>Username: $user.getUsername()</li><br>
+	<li>Gender: $user.getGender()</li><br>
+	<li>Year of Birth: $user.getBirthYear()</li><br>
+	<li>Country: $user.getCountry()</li><br>
+	<li>Zip/Postal Code: $user.getZip()</li><br>
+	</ul><br><br>
+
+
+	#if($currentUserType == "Critic" || $currentUserType == "PCO")
+		<h4>Organisation Details:</h4>
+		<ul>
+		<li>Organisation: $user.getOrg()</li><br>
+		<li>Phone Number: $user.getNum()</li><br>
+		</ul>
+	#end
+	
+	
+	<h6>TODO: Edit account details</h6>
+#end
+#end

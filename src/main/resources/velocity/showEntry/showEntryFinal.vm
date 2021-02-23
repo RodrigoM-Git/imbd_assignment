@@ -1,0 +1,6 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+<h2>Entry Form Submitted!</h2><br>
+<p>Please wait for administrator approval</p><br>
+<a href='../'>Click here to return to main page</a>
+#end

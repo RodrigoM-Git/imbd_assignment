@@ -1,0 +1,18 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+#if($currentUser)
+<p> You are already logged in </p>
+#else
+<h2>Before you register...</h2>
+<form action='/register' method='post' id='selectAccType'>
+	<label>Please select your account type</label><br>
+	<select id='accountType' name='accountType' form='selectAccType'>
+		<option value='User'>User</option>
+		<option value='Critic'>Critic</option>
+		<option value='PCO'>Production Company</option>
+	<br><br>
+	
+	<input type='submit' value='Submit Form'>
+</form>
+#end
+#end

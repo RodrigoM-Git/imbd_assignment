@@ -1,0 +1,46 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+#if($currentUser)
+<h2> Show Entry Form </h2>
+<div id = showEntry>
+	<div class = entryForm>
+		<form action='/showEntryTarget' method='post' id='showEntryForm'>
+			<div id="label">Username</div>
+			<input type='text' name='username' value=$currentUser readonly placeholder='Username'><br><br>
+			<div id= "label">Show Title </div> 
+			<input type='text' name='showTitle' value="" required placeholder = "Title" ><br><br>
+	
+			<div id= "label">Show Genre </div> 
+			<input type='text' name='showGenre' value="" required placeholder= "Genre"><br><br>
+	
+			<div id= "label">Show Length (in hours) </div> 
+			<input type='text' name='showLength' value="" pattern='^(\d{1}|\d{0,1}\.\d{1,2})$' required placeholder= "Length"><br><br>
+			
+			<div id= "buttonLabel">Show Type </div> <br>
+			<div id = "buttonLabel">
+			<input type='radio' id='movie' name='showType' value='Movie' required>
+			Movie   
+			</label>
+			<label>
+			<input type='radio' id='series' name='showType' value='Series'>
+			Series
+			</div><br><br>
+	
+			<div id= "label">Production Company </div> 
+			<input type='text' name='showPCO' value="" required placeholder= "Name"><br><br>
+			
+			<div id= "label">Year of Production </div> 
+			<input type='text' name='showYear' value="" pattern='^(\d{4})$' required placeholder= Year><br><br>
+			
+			<div id= "buttonlabel">Description </div> <br>
+			<textarea name='showDesc' rows='6' cols='50' required></textarea><br><br>
+			
+			<input type='submit' value='Submit Form'>
+	
+		</form>
+	</div>
+</div>
+#else
+<p>You must first login before accessing this page</p>
+#end
+#end

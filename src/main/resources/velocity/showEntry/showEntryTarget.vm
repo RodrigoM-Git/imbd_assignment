@@ -1,0 +1,5 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+<h2>Entry Form Details:</h2>
+$Info
+#end

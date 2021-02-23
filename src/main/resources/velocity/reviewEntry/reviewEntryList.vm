@@ -1,0 +1,10 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+
+#if($currentUserType == "Admin")
+	$Code
+#else
+<p>You must be an administrator to view this page</p>
+#end
+
+#end

@@ -1,0 +1,105 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+	   
+	        	<h1>$show.getShowTitle()</h1>
+	        
+	        		#if($show.getIsMovie())
+	        			#set($result = "Movie")
+	        		#elseif($show.getIsSeries())
+	        			#set($result= "Series")
+	        		#end
+	        	<h6>$show.getLength()h  | $show.getGenre() | $result $show.getYear() </h6>
+	        	<div id="image">
+	                #if ($show.getImages().size() > 0)
+		 			<img border= "0" src= "$show.getImages().get(0).getPath()" alt = "$show.getTitle()" width="300" height "1000"/>
+	                #end
+                </div>
+                
+                <h3>About</h3>   
+                <h5><p>Produced by $show.getPCO().getName()</p></h5>
+                <p>$show.getDescription()</p>
+                
+                <h4>Cast</h4>  
+                $cast
+                
+                <h4>Reviews</h4>
+               
+               <div id="review">
+                  	#foreach ($user in $show.getReviews())
+					#if ($user.getUsername().equals($currentUser))
+					#set ($currentUserReview = $user)
+					#end
+					#if (!$user.getReview().equals('') || $user.getRating() != 0)
+					#if ($user.getRating() > 0 && $user.getRating() < 6)
+						#set ($reviewRating = ${user.getRating()} + '/5')
+						#if (!$user.getReview().equals(''))
+							#set ($reviewRating = $reviewRating + ' - ')
+						#end
+					#else
+						#set ($reviewRating = '')
+					#end
+                	<p>${reviewRating}${user.getReview()}</p>
+                	
+                	#if ($user.getOrgName() != "None")
+                		<h6>$user.getUsername()- $user.getOrgName() - $user.getDate() </h6>
+                	#else
+                		<h6>$user.getUsername() - $user.getDate()</h6>
+                	#end
+					#if ($currentUserReview != $null && $currentUserReview.getReviewID() == $user.getReviewID())
+					<form method='post' action='/removereview'>
+					<input type='hidden' name='titleID' value='$show.getShowID()'/>
+					<input type='hidden' name='reviewID' value='$user.getReviewID()'/>
+					<input type='submit' value='Remove'/>
+					</form>
+					#end
+					#end
+                	#end
+               </div>
+
+			   <h4>Insert review</h4>
+			   ## checks that user is logged in
+			   #if($currentUser)
+			   #set ($ratingArray = ["","","","",""]) 
+			   ## checks to see if user has made a review
+			   #if($currentUserReview)
+			   ## if user has review text, set it as default text for new review
+			     #if ($currentUserReview.getReview() != '')
+			       #set ($currUserReviewText = "value = '" + $currentUserReview.getReview() + "'")
+			     #end
+			   ## if user has made a rating, set it as the default value for new review
+				 #if ($currentUserReview.getRating() != 0)
+				   $ratingArray.set($currentUserReview.getRating() - 1, "checked")
+				 #end
+			   #end
+			   <form method="post" action="/title/review">
+			   	   <div class="stars">  
+					<input type="radio" id="r1" name="rating" value="5" $ratingArray.get(4) />
+					<label for="r1">&#10038;</label>
+					<input type="radio" id="r2" name="rating" value="4" $ratingArray.get(3) />
+					<label for="r2">&#10038;</label>
+					<input type="radio" id="r3" name="rating" value="3" $ratingArray.get(2) />
+					<label for="r3">&#10038;</label>
+					<input type="radio" id="r4" name="rating" value="2" $ratingArray.get(1) />
+					<label for="r4">&#10038;</label>
+					<input type="radio" id="r5" name="rating" value="1" $ratingArray.get(0) />
+					<label for="r5">&#10038;</label>
+				   </div>
+				   <br>
+				   <input type="text" name="reviewText" $currUserReviewText />
+				   <input type="hidden" name="titleId" value="$show.getShowID()" />
+				   <input type="submit" value="Submit review" />
+				
+				</form>
+				#else
+				<p>Sorry but you must be logged in to make a review. Log in <a href="/login">here</a></p>
+				#end
+
+		#if($currentUser)
+			#if($user.getType() == "PCO")
+				#if($user.getID() == $show.getProco_id())
+					<button id='editShow' value='editShow'><a href='/titleEdit'>Edit Details</a></button>
+				#end
+			#end
+		#end
+      
+#end

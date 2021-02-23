@@ -1,0 +1,35 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+
+#if($currentUser)
+	#if($user.getType() == "PCO")
+		#if($user.getID() == $show.getProco_id())
+			<h2>EDITING DETAILS FOR SHOW: <br> $show.getShowTitle()</h2>
+
+			<div id='showEntry'>
+			<div class='entryForm'>
+			<form action='/titleEditSuccess' method='post' id='editShow'>
+				<div id='label'>Show Title: </div>
+				<input type='text' name='showTitle' value='$show.getShowTitle()' required><br><br>
+				
+				<div id='label'>Show Genre: </div>
+				<input type='text' name='showGenre' value='$show.getGenre()' required><br><br>
+
+				<div id='label'>Show Length: </div>
+				<input type='text' name='showLength' value='$show.getLength()' required><br><br>
+
+				<div id='label'>Year of Production: </div>
+				<input type='text' name='showYear' value='$show.getYear()' required><br><br>
+
+				<div id='label'>Description: </div>
+				<textarea name='showDesc' rows='6' cols='50' required>$show.getDescription()</textArea><br><br>
+
+				<input type='submit' value='Save Changes'>
+			</form>
+			</div>
+			</div>
+		#end
+	#end
+#end
+
+#end

@@ -1,0 +1,63 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+#if($currentUser)
+<p>You are already logged in</p>
+#else
+<h2> Sign Up </h2>
+<div id = showEntry>
+	<div class = entryForm>
+		<form action='/confirmRegistration' method='post' id='registrationForm'>
+			<div id='label'>Account Type: </div>
+			<input type='text' name='accountType' value=$accountType readonly><br><br>
+			<div id="label">First Name: </div>
+			<input type='text' name='firstName' value="" required placeholder ='First Name'><br><br>
+			<div id= "label">Last Name: </div> 
+			<input type='text' name='lastName' value="" required placeholder = "Last Name" ><br><br>
+	
+			<div id= "buttonLabel">Gender: </div> <br>
+			<div id = "buttonLabel">
+			<input type='radio' id='gender' name='gender' value='Male' required>Male   
+			<input type='radio' id='Female' name='gender' value='female'>Female 
+			<input type='radio' id='gender' name='gender' value='Other'>Other
+			</div><br><br>
+			
+			<div id= "label">Year of Birth: </div> 
+			<input type='number' name='birthYear' value="" required placeholder= "Year of Birth"><br><br>
+			
+			<div id= "label">Country: </div> 
+			<input type='text' name='country' value="" required placeholder= "Country"><br><br>
+			
+			<div id= "label">Zip/Postal Code: </div> 
+			<input type='number' name='postcode' value="" required placeholder= "Zip/Postal Code"><br><br>
+			
+			<div id= "label">Email: </div> 
+			<input type='email' name='email' value="" required placeholder= "Email"><br><br>
+
+			<div id='label'>Username: </div>
+			<input type='text' name='username' value='' required placeholder='Username'><br><br>
+	
+			<div id= "label">Password: </div> 
+			<input type='password' name='password' value="" required placeholder= "Password"><br><br>
+
+			<div id='label'>Confirm Password: </div>
+			<input type='password' name='confirmPassword' value='' required placeholder='Confirm Password'><br><br>
+			
+			#if($accountType == "User")
+			<input type='submit' name='submit' value='submit'>
+			</form>
+		</div>
+	</div>
+			#else
+			<div id='label'>Organisation Name: </div>
+			<input type='text' name='orgName' value='' required placeholder='Organisation Name'><br><br>
+
+			<div id='label'>Organisation Phone: </div>
+			<input type='number' name='orgPhone' value='' required placeholder='Organisation Phone'><br><br>
+
+			<input type='submit' name='submit' value='submit'>
+			</form>
+		</div>
+	</div>
+			#end
+#end
+#end

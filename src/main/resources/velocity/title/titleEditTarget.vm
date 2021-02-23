@@ -1,0 +1,5 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+<p>Changes to show successfully made!</p>
+<p><a href='/title/$show.getShowID()'>Click here to return to show</a></p>
+#end
